@@ -2,10 +2,10 @@ version: '3'
 
 services:
   owasp-zap:
-    image: owasp/zap2docker-stable:latest
+    image: zaproxy/zap-stable
     container_name: owasp-zap
     ports:
-      - "8080:8080"
+      - "7070:8080"  # Change the host port to 7070, keeping the container port as 8080
     volumes:
       - zap_data:/zap/wrk
     networks:
