@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  trivy:
+    image: aquasec/trivy:latest
+    container_name: trivy
+    entrypoint: ["trivy"]
+    volumes:
+      - trivy_cache:/root/.cache/trivy
+    networks:
+      - devsecops
+
+volumes:
+  trivy_cache:
+
+networks:
+  devsecops:
+    driver: bridge
+

@@ -31,8 +31,7 @@ ESLint helps maintain clean and consistent JavaScript code by catching errors an
 | Propriété  	  |                       Description                                                         |
 |------------     |-------------------------------------------------------------------------------------------|
 | **Name**        |    Prettier                                                                               |
-| **Definition**  |    An opinionated code formatter that supports many programming languages, 
-                       automatically formatting code  to a consistent style .                                 |
+| **Definition**  |    An opinionated code formatter that supports many programming languages,                |
 | **Strength**    |    Ensures a uniform code style across different developers and codebases.                |
 | **Advantage**   |    Reduces code review time and improves readability by enforcing consistent formatting.  |
 | **Utility**     |    Automates code formatting to maintain a consistent style                               |
@@ -88,26 +87,10 @@ services:
     image: sonarqube:latest
     container_name: sonarqube
     ports:
-      - "9001:9000"  # Changed the host port to 9001
-    environment:
-      - SONARQUBE_JDBC_URL=jdbc:postgresql://db:5432/sonar
-      - SONARQUBE_JDBC_USERNAME=sonar
-      - SONARQUBE_JDBC_PASSWORD=sonar
+      - "9001:9000" 
     volumes:
       - sonarqube_data:/opt/sonarqube/data
       - sonarqube_extensions:/opt/sonarqube/extensions
-    networks:
-      - devsecops
-
-  db:
-    image: postgres:latest
-    container_name: sonarqube_db
-    environment:
-      - POSTGRES_USER=sonar
-      - POSTGRES_PASSWORD=sonar
-      - POSTGRES_DB=sonar
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
     networks:
       - devsecops
 
@@ -118,74 +101,50 @@ networks:
 volumes:
   sonarqube_data:
   sonarqube_extensions:
-  postgres_data:
 
-## Docker Compose Configuration Explanation
+## Explication Docker Compose Configuration 
 
-This section provides a detailed breakdown of the Docker Compose file configuration.
+This section explains the configuration of the Docker Compose file for setting up SonarQube.
 
 ### 1. Services
 
 #### sonarqube
 
-- **image**: `sonarqube:latest`  
-  Specifies the Docker image to use for the SonarQube service, pulling the latest version of SonarQube.
+- **image**: `sonarqube:latest` 
+  Uses the latest version of the SonarQube image from Docker Hub.
 
-- **container_name**: `sonarqube`  
-  Assigns a custom name to the container for easy reference.
+- **container_name**: `sonarqube` 
+  Names the container `sonarqube` for easier reference.
 
-- **ports**: 
-  - `"9000:9000"`  
-    Maps port 9000 on the host to port 9000 on the container, allowing access to SonarQube's web interface via [http://localhost:9000](http://localhost:9000).
-
-- **environment**:
-  - `SONARQUBE_JDBC_URL=jdbc:postgresql://db:5432/sonar`  
-    Provides the JDBC URL for SonarQube to connect to the PostgreSQL database. `db` refers to the name of the PostgreSQL service defined in this Compose file.
-  - `SONARQUBE_JDBC_USERNAME=sonar`  
-    Sets the username for the PostgreSQL database.
-  - `SONARQUBE_JDBC_PASSWORD=sonar`  
-    Sets the password for the PostgreSQL database.
+- **ports**:
+  - `"9001:9000"` 
+    Maps port 9001 on the host to port 9000 on the container, making SonarQube accessible via [http://localhost:9001](http://localhost:9001).
 
 - **volumes**:
-  - `sonarqube_data:/opt/sonarqube/data`  
-    Mounts a volume to persist SonarQube's data.
-  - `sonarqube_extensions:/opt/sonarqube/extensions`  
-    Mounts a volume to persist SonarQube's extensions.
+  - `sonarqube_data:/opt/sonarqube/data` 
+    Persists SonarQube data to ensure it is retained across container restarts.
+  - `sonarqube_extensions:/opt/sonarqube/extensions` 
+    Persists SonarQube extensions for the same reason.
 
 - **networks**:
-  - `devsecops`  
-    Connects the SonarQube container to the `devsecops` network.
+  - `devsecops` 
+    Connects the container to the `devsecops` network.
 
-#### db
+### 2. Networks
 
-- **image**: `postgres:latest`  
-  Specifies the Docker image to use for the PostgreSQL service, pulling the latest version of PostgreSQL.
+#### devsecops
 
-- **container_name**: `sonarqube_db`  
-  Assigns a custom name to the PostgreSQL container.
+- **driver**: `bridge` 
+  Creates a custom network with a bridge driver to allow communication between containers if needed.
 
-- **environment**:
-  - `POSTGRES_USER=sonar`  
-    Sets the PostgreSQL username.
-  - `POSTGRES_PASSWORD=sonar`  
-    Sets the PostgreSQL password.
-  - `POSTGRES_DB=sonar`  
-    Creates a PostgreSQL database named `sonar`.
+### 3. Volumes
 
-- **volumes**:
-  - `postgres_data:/var/lib/postgresql/data`  
-    Mounts a volume to persist PostgreSQL's data.
+- **sonarqube_data** 
+  Stores SonarQube’s data, ensuring persistence even if the container is stopped or removed.
 
-- **networks**:
-  - `devsecops`  
-    Connects the PostgreSQL container to the `devsecops` network.
+- **sonarqube_extensions** 
+  Stores SonarQube’s extensions, ensuring persistence even if the container is stopped or removed.
 
-## 2. Networks
-
-### devsecops
-
-- **driver**: `bridge`  
-  Creates a custom bridge network named `devsecops`, allowing the SonarQube and PostgreSQL containers to communicate with each other.
 
 # Jest
 
@@ -316,6 +275,75 @@ Docker ensures consistent application environments and simplifies deployment, sc
 
 Why choose this tool?
 Trivy helps ensure container security by scanning images and configurations for vulnerabilities, improving overall security posture.
+
+## Docker-compose of Sonarqube
+
+version: '3'
+
+services:
+  trivy:
+    image: aquasec/trivy:latest
+    container_name: trivy
+    entrypoint: ["trivy"]
+    volumes:
+      - trivy_cache:/root/.cache/trivy
+    networks:
+      - devsecops
+
+volumes:
+  trivy_cache:
+
+networks:
+  devsecops:
+    driver: bridge
+
+
+## Explication Docker Compose Configuration 
+
+This section explains the configuration of the Docker Compose file for setting up Trivy.
+
+### Version
+
+- **version: '3'**  
+  Specifies the version of the Docker Compose file format. Version `3` is compatible with Docker Engine 1.13.0 and later and supports features such as defining services, networks, and volumes.
+
+### Services
+
+This section defines the services that make up your application. Each service represents a container that Docker Compose will manage.
+
+#### trivy
+
+- **image**: `aquasec/trivy:latest`  
+  Specifies the Docker image to use for this service. `aquasec/trivy:latest` pulls the latest version of the Trivy image from Docker Hub. Trivy is a security scanner for container images.
+
+- **container_name**: `trivy`  
+  Assigns a custom name (`trivy`) to the container for easier reference and management.
+
+- **entrypoint**: `[ "trivy" ]`  
+  Sets the entrypoint of the container. The `trivy` command will be executed when the container starts, overriding the default entrypoint specified in the Docker image.
+
+- **volumes**:
+  - `trivy_cache:/root/.cache/trivy`  
+    Defines a volume mapping. It mounts the `trivy_cache` volume to the `/root/.cache/trivy` directory in the container. This volume is used to persist Trivy’s cache data, which improves performance by avoiding repeated scans.
+
+- **networks**:
+  - `devsecops` 
+    Connects the container to the `devsecops` network.
+
+### Volumes
+
+This section defines the named volumes that are used to persist data or share data between containers.
+
+- **trivy_cache** 
+  A named volume used by the `trivy` service. It is used to store Trivy’s cache data, ensuring that this data persists across container restarts and is not lost when the container is stopped or removed.
+
+### Networks
+
+This section defines the networks used to enable communication between containers.
+
+- **devsecops**:
+  - **driver**: `bridge` 
+    Creates a custom network with the `bridge` driver, allowing containers to communicate with each other over this network.
 
 # Kubernetes
 
