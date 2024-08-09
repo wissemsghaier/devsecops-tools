@@ -9,6 +9,10 @@ services:
       - trivy_cache:/root/.cache/trivy
     networks:
       - devsecops
+    # Optional: You can add environment variables or command options here
+    environment:
+      - TRIVY_CACHE_DIR=/root/.cache/trivy
+    command: ["--help"]  # Use this to see available commands; replace with actual scan command
 
 volumes:
   trivy_cache:
@@ -16,4 +20,5 @@ volumes:
 networks:
   devsecops:
     driver: bridge
+
 
