@@ -185,18 +185,148 @@ PHPUnit is essential for maintaining high-quality PHP code by enabling thorough 
 Why choose this tool?
 Snyk helps secure open source dependencies by identifying and fixing vulnerabilities, reducing risk in software projects.
 
-# Dependency-Check
+# Dependency-Track
 
 | Propriété  	  |                       Description                                                         |
 |------------     |-------------------------------------------------------------------------------------------|
-| **Name**        |    OWASP DependencyCheck                                                                  |
-| **Definition**  |    Analyzes project dependencies to find known vulnerabilities.                           |
-| **Strength**    |    Comprehensive dependency vulnerability analysis                                        |
-| **Advantage**   |    Provides detailed reports on vulnerabilities in project dependencies.                  |
-| **Utility**     |    Identifies and manages vulnerabilities in dependencies.                                |
+| **Name**        |    OWASP Dependency-Track                                                                 |
+| **Definition**  |    Manages and monitors software dependencies for vulnerabilities.                        |
+| **Strength**    |    Comprehensive vulnerability management and real-time alerts.                           |
+| **Advantage**   |    Integrates with CI/CD pipelines and supports various data sources.                     |
+| **Utility**     |    Helps track and manage vulnerabilities in dependencies effectively.                    |
 
 Why choose this tool?
-Dependency-Check identifies vulnerabilities in project dependencies, ensuring that known security issues are addressed proactively.
+OWASP Dependency-Track is chosen for its extensive integration capabilities and real-time monitoring of vulnerabilities, making it ideal
+for proactive security management
+
+## Docker-compose of Dependency-Track
+```
+version: '3.8'
+
+services:
+  dependency-track:
+    image: dependencytrack/bundled:latest
+    container_name: dependency-track
+    ports:
+      - "8080:8080"  # Maps host port 8080 to container port 8080
+    environment:
+      - DATABASE_URL=jdbc:postgresql://db:5432/dependencytrack
+      - DATABASE_USER=dependencytrack
+      - DATABASE_PASSWORD=dependencytrack
+    volumes:
+      - dependencytrack_data:/opt/dependency-track/data
+    networks:
+      - devsecops
+    depends_on:
+      - db
+
+  db:
+    image: postgres:latest
+    container_name: dependencytrack_db
+    environment:
+      - POSTGRES_USER=dependencytrack
+      - POSTGRES_PASSWORD=dependencytrack
+      - POSTGRES_DB=dependencytrack
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - devsecops
+
+networks:
+  devsecops:
+    driver: bridge
+
+volumes:
+  dependencytrack_data:
+  postgres_data:
+```
+## Explication Docker Compose Configuration 
+
+This section explains the configuration of the Docker Compose file for setting up Nexus.
+
+### Version
+
+- **version: '3.8'**  
+  Specifies the version of the Docker Compose file format. Version `3.8` is compatible with Docker Engine 19.03.0 and later, offering improved features and functionality.
+
+### Services
+
+This section defines the services that make up your application. Each service represents a container that Docker Compose will manage.
+
+#### dependency-track
+
+- **image**: `dependencytrack/bundled:latest`  
+  Specifies the Docker image to use for this service. `dependencytrack/bundled:latest` pulls the latest version of Dependency-Track from Docker Hub. Dependency-Track is a dependency vulnerability management platform.
+
+- **container_name**: `dependency-track`  
+  Assigns a custom name (`dependency-track`) to the container for easier reference and management.
+
+- **ports**:
+  - `"8080:8080"`  
+    Maps port 8080 on the host to port 8080 on the container, allowing access to Dependency-Track via http://localhost:8080.
+
+- **environment**:
+  - `DATABASE_URL=jdbc:postgresql://db:5432/dependencytrack`  
+    Sets the JDBC URL for connecting to the PostgreSQL database.
+  - `DATABASE_USER=dependencytrack`  
+    Sets the username for the PostgreSQL database.
+  - `DATABASE_PASSWORD=dependencytrack`  
+    Sets the password for the PostgreSQL database.
+
+- **volumes**:
+  - `dependencytrack_data:/opt/dependency-track/data`  
+    Mounts the `dependencytrack_data` volume to `/opt/dependency-track/data` in the container, ensuring that Dependency-Track data persists across container restarts.
+
+- **networks**:
+  - `devsecops`  
+    Connects the container to the `devsecops` network, allowing communication with other containers on this network.
+
+- **depends_on**:
+  - `db`  
+    Specifies that the `dependency-track` service depends on the `db` service. Docker Compose will start `db` before `dependency-track`.
+
+#### db
+
+- **image**: `postgres:latest`  
+  Specifies the Docker image to use for the PostgreSQL service. `postgres:latest` pulls the latest version of PostgreSQL from Docker Hub.
+
+- **container_name**: `dependencytrack_db`  
+  Assigns a custom name (`dependencytrack_db`) to the PostgreSQL container.
+
+- **environment**:
+  - `POSTGRES_USER=dependencytrack`  
+    Sets the PostgreSQL username.
+  - `POSTGRES_PASSWORD=dependencytrack`  
+    Sets the PostgreSQL password.
+  - `POSTGRES_DB=dependencytrack`  
+    Creates a PostgreSQL database named `dependencytrack`.
+
+- **volumes**:
+  - `postgres_data:/var/lib/postgresql/data`  
+    Mounts the `postgres_data` volume to `/var/lib/postgresql/data` in the container, ensuring that PostgreSQL data persists across container restarts.
+
+- **networks**:
+  - `devsecops`  
+    Connects the container to the `devsecops` network, allowing communication with other containers on this network.
+
+### Networks
+
+This section defines the networks used to enable communication between containers.
+
+- **devsecops**:
+  - **driver**: `bridge`  
+    Creates a custom network with the `bridge` driver. This allows containers on this network to communicate with each other.
+
+### Volumes
+
+This section defines the named volumes that are used to persist data or share data between containers.
+
+- **dependencytrack_data**  
+  A named volume used by the `dependency-track` service to store Dependency-Track data. This ensures that the data persists even if the container is stopped or removed.
+
+- **postgres_data**  
+  A named volume used by the `db` service to store PostgreSQL data. This ensures that the database data persists even if the container is stopped or removed.
+
 
 # npm
 
@@ -250,6 +380,77 @@ Selenium enables automation of web application testing, providing a way to verif
 Why choose this tool?
 Nexus provides a centralized solution for managing and storing software artifacts, streamlining the management of dependencies and versions.
 
+## Docker-compose of Nexus
+```
+version: '3'
+
+services:
+  nexus:
+    image: sonatype/nexus3:latest
+    container_name: nexus
+    ports:
+      - "8081:8081"
+    volumes:
+      - nexus_data:/nexus-data
+    networks:
+      - devsecops
+
+volumes:
+  nexus_data:
+
+networks:
+  devsecops:
+    driver: bridge
+```
+## Explication Docker Compose Configuration 
+
+This section explains the configuration of the Docker Compose file for setting up Nexus.
+
+### Version
+
+- **version: '3'**  
+  Specifies the version of the Docker Compose file format. Version `3` is compatible with Docker Engine 1.13.0 and later and supports defining services, networks, and volumes.
+
+### Services
+
+This section defines the services that make up your application. Each service represents a container that Docker Compose will manage.
+
+#### nexus
+
+- **image**: `sonatype/nexus3:latest`  
+  Specifies the Docker image to use for this service. `sonatype/nexus3:latest` pulls the latest version of the Nexus 3 image from Docker Hub. Nexus Repository Manager is used to manage and host your software artifacts.
+
+- **container_name**: `nexus`  
+  Assigns a custom name (`nexus`) to the container for easier reference and management.
+
+- **ports**:
+  - `8081:8081`  
+    Maps port `8081` on the host to port `8081` on the container. This allows you to access Nexus's web interface via `http://localhost:8081`.
+
+- **volumes**:
+  - `nexus_data:/nexus-data`  
+    Defines a volume mapping. It mounts the `nexus_data` volume to the `/nexus-data` directory in the container. This volume is used to persist Nexus's data, including configuration and repository data, ensuring it is retained across container restarts.
+
+- **networks**:
+  - `devsecops`  
+    Connects the container to the `devsecops` network.
+
+### Volumes
+
+This section defines the named volumes that are used to persist data or share data between containers.
+
+- **nexus_data**  
+  A named volume used by the `nexus` service to store Nexus's data. This ensures that configuration and repository data persist even if the container is stopped or removed.
+
+### Networks
+
+This section defines the networks used to enable communication between containers.
+
+- **devsecops**:
+  - **driver**: `bridge`  
+    Creates a custom network with the `bridge` driver. This allows containers on this network to communicate with each other.
+
+
 # Docker
 
 | Propriété  	  |                       Description                                                                                   |
@@ -276,7 +477,7 @@ Docker ensures consistent application environments and simplifies deployment, sc
 Why choose this tool?
 Trivy helps ensure container security by scanning images and configurations for vulnerabilities, improving overall security posture.
 
-## Docker-compose of Sonarqube
+## Docker-compose of Trivy
 ```
 version: '3'
 
@@ -371,6 +572,89 @@ Kubernetes offers advanced orchestration and management for containerized applic
 Why choose this tool?
 Falco provides real-time security monitoring for containers and hosts, detecting abnormal behavior and potential threats.
 
+## Docker-compose of Falco 
+
+```
+version: '3'
+
+services:
+  falco:
+    image: falcosecurity/falco:latest
+    container_name: falco
+    privileged: true
+    volumes:
+      - /proc:/host/proc:ro
+      - /boot:/host/boot:ro
+      - /lib/modules:/host/lib/modules:ro
+      - falco_rules:/etc/falco
+    networks:
+      - devsecops
+
+volumes:
+  falco_rules:
+
+networks:
+  devsecops:
+    driver: bridge
+```
+
+## Explication Docker Compose Configuration 
+
+This section explains the configuration of the Docker Compose file for setting up Flaco.
+
+### Version
+
+- **version: '3'**  
+  Specifies the version of the Docker Compose file format. Version `3` is compatible with Docker Engine 1.13.0 and later and supports defining services, networks, and volumes.
+
+### Services
+
+This section defines the services that make up your application. Each service represents a container that Docker Compose will manage.
+
+#### falco
+
+- **image**: `falcosecurity/falco:latest`  
+  Specifies the Docker image to use for this service. `falcosecurity/falco:latest` pulls the latest version of the Falco image from Docker Hub. Falco is a security tool for detecting anomalous activity in your applications.
+
+- **container_name**: `falco`  
+  Assigns a custom name (`falco`) to the container for easier reference and management.
+
+- **privileged**: `true`  
+  Runs the container in privileged mode, which grants it extended permissions. This is necessary for Falco to access certain system features and perform its security monitoring.
+
+- **volumes**:
+  - `/proc:/host/proc:ro`  
+    Mounts the host's `/proc` directory into the container at `/host/proc` in read-only mode. This allows Falco to access system information.
+
+  - `/boot:/host/boot:ro`  
+    Mounts the host's `/boot` directory into the container at `/host/boot` in read-only mode. This is used to access kernel modules and other boot-related files.
+
+  - `/lib/modules:/host/lib/modules:ro`  
+    Mounts the host's `/lib/modules` directory into the container at `/host/lib/modules` in read-only mode. This allows Falco to access kernel modules needed for monitoring.
+
+  - **falco_rules**: `/etc/falco`  
+    Mounts a named volume `falco_rules` to `/etc/falco` in the container. This volume is used to persist Falco's configuration and rules.
+
+- **networks**:
+  - `devsecops`  
+    Connects the container to the `devsecops` network.
+
+### Volumes
+
+This section defines the named volumes that are used to persist data or share data between containers.
+
+- **falco_rules**  
+  A named volume used by the `falco` service to store Falco's configuration files and rules. This ensures that the configuration is persistent and can be reused across container restarts.
+
+### Networks
+
+This section defines the networks used to enable communication between containers.
+
+- **devsecops**:
+  - **driver**: `bridge`  
+    Creates a custom network with the `bridge` driver. This allows containers on this network to communicate with each other.
+
+
 # OWASP ZAP
 
 | Propriété  	  |                       Description                                                         |
@@ -383,6 +667,79 @@ Falco provides real-time security monitoring for containers and hosts, detecting
 
 Why choose this tool?
 OWASP ZAP provides an effective way to identify and address security vulnerabilities in web applications, enhancing overall security.
+
+## Docker-compose of OWASP-ZAP
+
+```
+version: '3'
+
+services:
+  owasp-zap:
+    image: owasp/zap2docker-stable:latest
+    container_name: owasp-zap
+    ports:
+      - "8080:8080"
+    volumes:
+      - zap_data:/zap/wrk
+    networks:
+      - devsecops
+
+volumes:
+  zap_data:
+
+networks:
+  devsecops:
+    driver: bridge
+```
+## Explication Docker Compose Configuration 
+
+This section explains the configuration of the Docker Compose file for setting up OWASP-ZAP.
+
+### Version
+
+- **version: '3'**  
+  Specifies the version of the Docker Compose file format. Version `3` is compatible with Docker Engine 1.13.0 and later and supports defining services, networks, and volumes.
+
+### Services
+
+This section defines the services that make up your application. Each service represents a container that Docker Compose will manage.
+
+#### owasp-zap
+
+- **image**: `owasp/zap2docker-stable:latest`  
+  Specifies the Docker image to use for this service. `owasp/zap2docker-stable:latest` pulls the latest stable version of the OWASP ZAP image from Docker Hub. OWASP ZAP is a popular security scanner for finding vulnerabilities in web applications.
+
+- **container_name**: `owasp-zap`  
+  Assigns a custom name (`owasp-zap`) to the container for easier reference and management.
+
+- **ports**:
+  - `8080:8080`  
+    Maps port `8080` on the host to port `8080` on the container. This allows you to access OWASP ZAP's web interface via `http://localhost:8080`.
+
+- **volumes**:
+  - `zap_data:/zap/wrk`  
+    Defines a volume mapping. It mounts the `zap_data` volume to the `/zap/wrk` directory in the container. This volume is used to persist ZAP's data, ensuring that scan results and configurations are retained across container restarts.
+
+- **networks**:
+  - `devsecops`  
+    Connects the container to the `devsecops` network.
+
+### Volumes
+
+This section defines the named volumes that are used to persist data or share data between containers.
+
+- **zap_data**  
+  A named volume used by the `owasp-zap` service to store ZAP’s data. This ensures that data such as scan results and configuration settings persist even if the container is stopped or removed.
+
+### Networks
+
+This section defines the networks used to enable communication between containers.
+
+- **devsecops**:
+  - **driver**: `bridge`  
+    Creates a custom network with the `bridge` driver. This allows containers on this network to communicate with each other.
+
+
 
 # OpenSCAP
 
@@ -397,6 +754,75 @@ OWASP ZAP provides an effective way to identify and address security vulnerabili
 Why choose this tool?
 OpenSCAP helps ensure compliance and manage security configurations, providing valuable insights into system security and compliance status.
 
+## Docker-compose of OpenSCAP
+```
+version: '3'
+
+services:
+  openscap:
+    image: openscap/openscap:latest
+    container_name: openscap
+    entrypoint: ["oscap"]
+    volumes:
+      - openscap_data:/data
+    networks:
+      - devsecops
+
+volumes:
+  openscap_data:
+
+networks:
+  devsecops:
+    driver: bridge
+```
+## Explication Docker Compose Configuration 
+
+This section explains the configuration of the Docker Compose file for setting up OpenSCAP.
+
+### Version
+
+- **version: '3'**  
+  Specifies the version of the Docker Compose file format. Version `3` is compatible with Docker Engine 1.13.0 and later and supports defining services, networks, and volumes.
+
+### Services
+
+This section defines the services that make up your application. Each service represents a container that Docker Compose will manage.
+
+#### openscap
+
+- **image**: `openscap/openscap:latest`  
+  Specifies the Docker image to use for this service. `openscap/openscap:latest` pulls the latest version of the OpenSCAP image from Docker Hub. OpenSCAP is a security compliance scanner.
+
+- **container_name**: `openscap`  
+  Assigns a custom name (`openscap`) to the container for easier reference and management.
+
+- **entrypoint**:  
+  - `["oscap"]`  
+    Sets the entrypoint of the container to the `oscap` command. This overrides the default entrypoint specified in the Docker image, ensuring that `oscap` is executed when the container starts.
+
+- **volumes**:
+  - `openscap_data:/data`  
+    Defines a volume mapping. It mounts the `openscap_data` volume to the `/data` directory in the container. This volume is used to store OpenSCAP data, ensuring persistence across container restarts and preventing data loss when the container is stopped or removed.
+
+- **networks**:
+  - `devsecops`  
+    Connects the container to the `devsecops` network, allowing communication with other containers on the same network.
+
+### Volumes
+
+This section defines the named volumes that are used to persist data or share data between containers.
+
+- **openscap_data**  
+  A named volume used by the `openscap` service to store OpenSCAP data. This ensures that the data persists even if the container is stopped or removed.
+
+### Networks
+
+This section defines the networks used to enable communication between containers.
+
+- **devsecops**:
+  - **driver**: `bridge`  
+    Creates a custom network with the `bridge` driver. This allows containers on this network to communicate with each other.
+
 # ELK Stack
 
 | Propriété  	  |                       Description                                                         |
@@ -409,6 +835,164 @@ OpenSCAP helps ensure compliance and manage security configurations, providing v
 
 Why choose this tool?
 The ELK Stack offers robust log management, search, and visualization capabilities, helping to monitor and analyze system and application logs effectively.
+
+## Docker-compose of OWASP-ZAP
+
+```
+version: '3'
+
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.0.0
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+    networks:
+      - devsecops
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash:8.0.0
+    container_name: logstash
+    ports:
+      - "5044:5044"
+    volumes:
+      - logstash_config:/usr/share/logstash/config
+      - logstash_pipelines:/usr/share/logstash/pipeline
+    networks:
+      - devsecops
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.0.0
+    container_name: kibana
+    ports:
+      - "5601:5601"
+    depends_on:
+      - elasticsearch
+    networks:
+      - devsecops
+
+volumes:
+  elasticsearch_data:
+  logstash_config:
+  logstash_pipelines:
+  kibana_data:
+
+networks:
+  devsecops:
+    driver: bridge
+```
+## Explication Docker Compose Configuration 
+
+This section explains the configuration of the Docker Compose file for setting up ELK.
+
+### Version
+
+- **version: '3'**  
+  Specifies the version of the Docker Compose file format. Version `3` is compatible with Docker Engine 1.13.0 and later and supports defining services, networks, and volumes.
+
+### Services
+
+This section defines the services that make up your application. Each service represents a container that Docker Compose will manage.
+
+#### elasticsearch
+
+- **image**: `docker.elastic.co/elasticsearch/elasticsearch:8.0.0`  
+  Specifies the Docker image to use for this service. `docker.elastic.co/elasticsearch/elasticsearch:8.0.0` pulls Elasticsearch version 8.0.0 from the Elastic Docker repository. Elasticsearch is a search and analytics engine.
+
+- **container_name**: `elasticsearch`  
+  Assigns a custom name (`elasticsearch`) to the container for easier reference and management.
+
+- **environment**:
+  - `discovery.type=single-node`  
+    Configures Elasticsearch to run in single-node mode, suitable for development or testing environments.
+
+- **ports**:
+  - `9200:9200`  
+    Maps port `9200` on the host to port `9200` on the container, making Elasticsearch accessible via `http://localhost:9200`.
+
+  - `9300:9300`  
+    Maps port `9300` on the host to port `9300` on the container, used for internal cluster communication.
+
+- **volumes**:
+  - `elasticsearch_data:/usr/share/elasticsearch/data`  
+    Defines a volume mapping. It mounts the `elasticsearch_data` volume to the `/usr/share/elasticsearch/data` directory in the container. This volume is used to persist Elasticsearch data, ensuring it is retained across container restarts.
+
+- **networks**:
+  - `devsecops`  
+    Connects the container to the `devsecops` network.
+
+#### logstash
+
+- **image**: `docker.elastic.co/logstash/logstash:8.0.0`  
+  Specifies the Docker image to use for this service. `docker.elastic.co/logstash/logstash:8.0.0` pulls Logstash version 8.0.0 from the Elastic Docker repository. Logstash is used for collecting, parsing, and storing logs.
+
+- **container_name**: `logstash`  
+  Assigns a custom name (`logstash`) to the container for easier reference and management.
+
+- **ports**:
+  - `5044:5044`  
+    Maps port `5044` on the host to port `5044` on the container, typically used for Logstash input plugins.
+
+- **volumes**:
+  - `logstash_config:/usr/share/logstash/config`  
+    Mounts the `logstash_config` volume to the `/usr/share/logstash/config` directory in the container, allowing you to provide custom configuration files for Logstash.
+
+  - `logstash_pipelines:/usr/share/logstash/pipeline`  
+    Mounts the `logstash_pipelines` volume to the `/usr/share/logstash/pipeline` directory in the container, where you can define Logstash pipeline configurations.
+
+- **networks**:
+  - `devsecops`  
+    Connects the container to the `devsecops` network.
+
+#### kibana
+
+- **image**: `docker.elastic.co/kibana/kibana:8.0.0`  
+  Specifies the Docker image to use for this service. `docker.elastic.co/kibana/kibana:8.0.0` pulls Kibana version 8.0.0 from the Elastic Docker repository. Kibana is a data visualization tool for Elasticsearch.
+
+- **container_name**: `kibana`  
+  Assigns a custom name (`kibana`) to the container for easier reference and management.
+
+- **ports**:
+  - `5601:5601`  
+    Maps port `5601` on the host to port `5601` on the container, making Kibana accessible via `http://localhost:5601`.
+
+- **depends_on**:
+  - `elasticsearch`  
+    Ensures that the `elasticsearch` service is started before `kibana` to avoid connection issues.
+
+- **networks**:
+  - `devsecops`  
+    Connects the container to the `devsecops` network.
+
+### Volumes
+
+This section defines the named volumes that are used to persist data or share data between containers.
+
+- **elasticsearch_data**  
+  A named volume used by the `elasticsearch` service to store Elasticsearch data. This ensures that data persists even if the container is stopped or removed.
+
+- **logstash_config**  
+  A named volume used by the `logstash` service to store Logstash configuration files.
+
+- **logstash_pipelines**  
+  A named volume used by the `logstash` service to store Logstash pipeline configurations.
+
+- **kibana_data**  
+  A named volume used by the `kibana` service to store Kibana's data (not used in the current configuration but reserved for potential future use).
+
+### Networks
+
+This section defines the networks used to enable communication between containers.
+
+- **devsecops**:
+  - **driver**: `bridge`  
+    Creates a custom network with the `bridge` driver. This allows containers on this network to communicate with each other.
+
 
 # Slack
 

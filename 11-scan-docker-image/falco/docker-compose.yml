@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  falco:
+    image: falcosecurity/falco:latest
+    container_name: falco
+    privileged: true
+    volumes:
+      - /proc:/host/proc:ro
+      - /boot:/host/boot:ro
+      - /lib/modules:/host/lib/modules:ro
+      - falco_rules:/etc/falco
+    networks:
+      - devsecops
+
+volumes:
+  falco_rules:
+
+networks:
+  devsecops:
+    driver: bridge
+

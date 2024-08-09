@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  openscap:
+    image: openscap/openscap:latest
+    container_name: openscap
+    entrypoint: ["oscap"]
+    volumes:
+      - openscap_data:/data
+    networks:
+      - devsecops
+
+volumes:
+  openscap_data:
+
+networks:
+  devsecops:
+    driver: bridge
+

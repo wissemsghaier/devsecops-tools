@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  nexus:
+    image: sonatype/nexus3:latest
+    container_name: nexus
+    ports:
+      - "8081:8081"
+    volumes:
+      - nexus_data:/nexus-data
+    networks:
+      - devsecops
+
+volumes:
+  nexus_data:
+
+networks:
+  devsecops:
+    driver: bridge
+

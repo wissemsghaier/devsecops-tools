@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  owasp-zap:
+    image: owasp/zap2docker-stable:latest
+    container_name: owasp-zap
+    ports:
+      - "8080:8080"
+    volumes:
+      - zap_data:/zap/wrk
+    networks:
+      - devsecops
+
+volumes:
+  zap_data:
+
+networks:
+  devsecops:
+    driver: bridge
+
