@@ -1,5 +1,416 @@
 # DevSecOps Tools
 
+# Git-Secrets
+
+| Propriété  	  |                       Description                                                         |
+|------------     |-------------------------------------------------------------------------------------------|
+| **Name**        |    Git-Secrets                                                                            |
+| **Definition**  |    Prevents the inclusion of secrets (e.g., API keys, passwords) in Git repositories.     |
+| **Strength**    |    Detects secrets in Git commits.                                                        |
+| **Advantage**   |    Helps avoid accidental exposure of secrets.                                            |
+| **Utility**     |    Protects against accidental secrets leakage.                                           |
+
+Why choose this tool?
+Git-Secrets prevents sensitive data from being committed to Git repositories, reducing the risk of accidental exposure.
+
+# ESLint
+
+| Propriété  	  |                       Description                                                         |
+|------------     |-------------------------------------------------------------------------------------------|
+| **Name**        |    ESLint                                                                                 |
+| **Definition**  |    Static code analysis tool for JavaScript to detect errors and enforce coding style.    |
+| **Strength**    |    Real-time analysis of JavaScript code.                                                 |
+| **Advantage**   |    Improves code quality by identifying errors and style issues.                          |
+| **Utility**     |    Ensures high-quality JavaScript code.                                           	      |
+
+Why choose this tool?
+ESLint helps maintain clean and consistent JavaScript code by catching errors and enforcing coding standards early. 
+
+# Prettier
+
+| Propriété  	  |                       Description                                                         |
+|------------     |-------------------------------------------------------------------------------------------|
+| **Name**        |    Prettier                                                                               |
+| **Definition**  |    An opinionated code formatter that supports many programming languages, 
+                       automatically formatting code  to a consistent style .                                 |
+| **Strength**    |    Ensures a uniform code style across different developers and codebases.                |
+| **Advantage**   |    Reduces code review time and improves readability by enforcing consistent formatting.  |
+| **Utility**     |    Automates code formatting to maintain a consistent style                               |
+
+Why Choose Prettier?
+Prettier automates code formatting, ensuring consistency and reducing the time spent on code reviews.
+
+# Commitizen
+
+| Propriété  	  |                       Description                                                         |
+|------------     |-------------------------------------------------------------------------------------------|
+| **Name**        |    Commitizen                                                                             |
+| **Definition**  |    Tool for generating standardized commit messages.                                      |
+| **Strength**    |    Standardizes commit messages.                                                          |
+| **Advantage**   |    Facilitates version management and change tracking.                                    |
+| **Utility**     |    Ensures consistent and readable commit messages.                                       |
+
+Why choose this tool?
+Commitizen standardizes commit messages, making versioning and tracking changes more manageable and readable
+
+# Vault
+
+| Propriété  	  |                       Description                                                         |
+|------------     |-------------------------------------------------------------------------------------------|
+| **Name**        |    HashiCorp Vault                                                                        |
+| **Definition**  |    Secret management tool for securely storing and controlling access to secrets.         |
+| **Strength**    |    Centralized secret management.                                                         |
+| **Advantage**   |    Provides robust security and access control for secrets.                               |
+| **Utility**     |    Centralizes and secures sensitive data.                                                |
+
+Why choose this tool?
+Vault offers centralized and secure management of secrets, providing strong protection and access control for sensitive information.
+
+# SonarQube
+
+| Propriété  	  |                       Description                                                                      |
+|------------     |--------------------------------------------------------------------------------------------------------|
+| **Name**        |    SonarQube                                                                                           |
+| **Definition**  |    Continuous code quality inspection platform that identifies bugs, vulnerabilities, and code smells. |
+| **Strength**    |    Comprehensive code quality analysis.                                                                |
+| **Advantage**   |    Provides detailed insights into code quality and security issues.                                   |
+| **Utility**     |    Enhances code quality and security.                                                                 |
+
+Why choose this tool?
+SonarQube offers detailed analysis of code quality, helping to detect and fix bugs and vulnerabilities early in the development process.
+
+# Jest
+
+| Propriété  	  |                       Description                                                         |
+|------------     |-------------------------------------------------------------------------------------------|
+| **Name**        |    Jest                                                                                   |
+| **Definition**  |    JavaScript testing framework for unit, integration, and snapshot tests.                |
+| **Strength**    |    Fast and easy to configure.                                                            |
+| **Advantage**   |    Supports unit and snapshot testing with minimal setup.                                 |
+| **Utility**     |    Provides efficient testing for JavaScript applications.                                                |
+
+Why choose this tool?
+Jest simplifies the process of writing and running tests for JavaScript applications, ensuring robust and reliable code.
+
+# PHPUnit
+
+| Propriété  	  |                       Description                                                         |
+|------------     |-------------------------------------------------------------------------------------------|
+| **Name**        |    PHPUnit                                                                                |
+| **Definition**  |    Testing framework for PHP that supports unit testing.                                  |
+| **Strength**    |    Comprehensive unit testing for PHP.                                                    |
+| **Advantage**   |    Ensures PHP code quality and reliability through unit tests.                           |
+| **Utility**     |    Facilitates unit testing for PHP projects.                                  
+
+Why choose this tool?
+PHPUnit is essential for maintaining high-quality PHP code by enabling thorough unit testing and validation.
+
+# Snyk
+
+| Propriété  	  |                       Description                                                         |
+|------------     |-------------------------------------------------------------------------------------------|
+| **Name**        |    Snyk                                                                                   |
+| **Definition**  |    Tool for finding and fixing vulnerabilities in open source dependencies.               |
+| **Strength**    |    Detects and fixes vulnerabilities in dependencies.                                     |
+| **Advantage**   |    Enhances security of open source components by addressing vulnerabilities              |
+| **Utility**     |    Secures open source dependencies.                                                      |
+
+Why choose this tool?
+Snyk helps secure open source dependencies by identifying and fixing vulnerabilities, reducing risk in software projects.
+
+# Dependency-Check
+
+| Propriété  	  |                       Description                                                         |
+|------------     |-------------------------------------------------------------------------------------------|
+| **Name**        |    OWASP DependencyCheck                                                                  |
+| **Definition**  |    Analyzes project dependencies to find known vulnerabilities.                           |
+| **Strength**    |    Comprehensive dependency vulnerability analysis                                        |
+| **Advantage**   |    Provides detailed reports on vulnerabilities in project dependencies.                  |
+| **Utility**     |    Identifies and manages vulnerabilities in dependencies.                                |
+
+Why choose this tool?
+Dependency-Check identifies vulnerabilities in project dependencies, ensuring that known security issues are addressed proactively.
+
+# npm
+
+| Propriété  	  |                       Description                                                                |
+|------------     |--------------------------------------------------------------------------------------------------|
+| **Name**        |    npm (Node Package Manager)                                                                    |
+| **Definition**  |    The default package manager for JavaScript and Node.js, used to manage project dependencies   |
+| **Strength**    |    Manages packages and dependencies efficiently with a vast repository.                         |
+| **Advantage**   |    Simplifies dependency management and provides access to a wide range of JavaScript libraries  |
+| **Utility**     |    Facilitates the management of JavaScript project dependencies and automates scripts.          |
+
+Why Choose npm?
+npm provides robust dependency management and access to a comprehensive ecosystem of JavaScript packages, streamlining development.
+
+# Maven
+
+| Propriété  	  |                       Description                                                         |
+|------------     |-------------------------------------------------------------------------------------------|
+| **Name**        |    Maven                                                                                  |
+| **Definition**  |    A build automation tool for Java projects that manages project builds, dependencies    |
+| **Strength**    |    Streamlines build processes and dependency management for Java applications.           |
+| **Advantage**   |    Simplifies complex build configurations                                                |
+| **Utility**     |    Automates the build lifecycle and dependency management in Java applications.          |
+
+Why Choose Maven?
+Maven automates the build and dependency management process for Java projects, ensuring a consistent and standardized approach.
+
+# Selenium
+
+| Propriété  	  |                       Description                                                                           |
+|------------     |-------------------------------------------------------------------------------------------------------------|
+| **Name**        |    Selenium                                                                                                 |
+| **Definition**  |    The default package manager for JavaScript and Node.js, used to manage project dependencies and scripts  |
+| **Strength**    |    Manages packages and dependencies efficiently with a vast repository.                                    |
+| **Advantage**   |    Simplifies dependency management and provides access to a wide range of JavaScript libraries and tools.  |
+| **Utility**     |    Facilitates the management of JavaScript project dependencies and automates scripts.                     |
+
+Why choose this tool?
+Selenium enables automation of web application testing, providing a way to verify functionality and performance across different browsers.
+
+# Nexus
+
+| Propriété  	  |                       Description                                                         |
+|------------     |-------------------------------------------------------------------------------------------|
+| **Name**        |    Nexus Repository Manager                                                               |
+| **Definition**  |    Manages and stores software artifacts and dependencies.                                |
+| **Strength**    |    Centralized repository management.                                                     |
+| **Advantage**   |    Simplifies artifact storage and dependency management.                                 |
+| **Utility**     |    Manages and organizes software components.                                             |
+
+Why choose this tool?
+Nexus provides a centralized solution for managing and storing software artifacts, streamlining the management of dependencies and versions.
+
+# Docker
+
+| Propriété  	  |                       Description                                                                                   |
+|------------     |---------------------------------------------------------------------------------------------------------------------|
+| **Name**        |    Docker                                                                                                           |
+| **Definition**  |    A platform for containerizing applications and their dependencie and its environment.                            |
+| **Strength**    |    Provides lightweight, portable containers that encapsulate application code                                      |
+| **Advantage**   |    Facilitates scalability, deployment, and management of applications across different environments.               |
+| **Utility**     |    Simplifies application deployment and ensures consistency across different environments through containerization.|
+
+Why Choose Docker?
+Docker ensures consistent application environments and simplifies deployment, scaling, and management through containerization.
+
+# Trivy
+
+| Propriété  	  |                       Description                                                         |
+|------------     |-------------------------------------------------------------------------------------------|
+| **Name**        |    Trivy                                                                                  |
+| **Definition**  |    Security scanner for container images and configurations.                              |
+| **Strength**    |    Comprehensive vulnerability scanning for containers.                                   |
+| **Advantage**   |    Detects security issues in container images and configurations.                        |
+| **Utility**     |    Enhances container security by identifying vulnerabilities.                            |
+
+Why choose this tool?
+Trivy helps ensure container security by scanning images and configurations for vulnerabilities, improving overall security posture.
+
+# Kubernetes
+
+| Propriété  	  |                       Description                                                                                   |
+|------------     |---------------------------------------------------------------------------------------------------------------------|
+| **Name**        |    Kubernetes                                                                                                       |
+| **Definition**  |    An open-source platform for automating the deployment, scaling, and management ofcontainerized 
+                       applications across clusters of machines.                                                                        |
+| **Strength**    |    Provides powerful orchestration capabilities for managing containerized applications.                            |
+| **Advantage**   |    Enables efficient scaling, load balancing, and self-healing of applications within clusters.                     |
+| **Utility**     |    Facilitates the orchestration and management of containerized applications, improving scalability and reliability|
+
+Why Choose Kubernetes?
+Kubernetes offers advanced orchestration and management for containerized applications, ensuring scalability and reliability in complex deployments. 
+
+# Falco
+
+| Propriété  	  |                       Description                                                         |
+|------------     |-------------------------------------------------------------------------------------------|
+| **Name**        |    Falco                                                                                  |
+| **Definition**  |    Runtime security tool that detects abnormal behavior in containers and hosts.          |
+| **Strength**    |    Real-time monitoring for suspicious activity.                                          |
+| **Advantage**   |    Detects and alerts on unexpected or malicious behavior.                                |
+| **Utility**     |    Monitors runtime behavior to detect security threats.                                  |
+
+Why choose this tool?
+Falco provides real-time security monitoring for containers and hosts, detecting abnormal behavior and potential threats.
+
+# OWASP ZAP
+
+| Propriété  	  |                       Description                                                         |
+|------------     |-------------------------------------------------------------------------------------------|
+| **Name**        |    OWASP ZAP                                                                              |
+| **Definition**  |    Security scanner for finding vulnerabilities in web applications.                      |
+| **Strength**    |    Comprehensive web application security scanning.                                       |
+| **Advantage**   |    Identifies security vulnerabilities in web applications.                               |
+| **Utility**     |    Helps secure web applications by detecting security flaws.                             |
+
+Why choose this tool?
+OWASP ZAP provides an effective way to identify and address security vulnerabilities in web applications, enhancing overall security.
+
+# OpenSCAP
+
+| Propriété  	  |                       Description                                                         |
+|------------     |-------------------------------------------------------------------------------------------|
+| **Name**        |    OpenSCAP                                                                               |
+| **Definition**  |    Framework for compliance monitoring and vulnerability management.                      |
+| **Strength**    |    Compliance and security configuration auditing.                                        |
+| **Advantage**   |    Provides detailed compliance and security configuration reports.                       |
+| **Utility**     |    Ensures compliance and manages vulnerabilities.                                        |
+
+Why choose this tool?
+OpenSCAP helps ensure compliance and manage security configurations, providing valuable insights into system security and compliance status.
+
+# ELK Stack
+
+| Propriété  	  |                       Description                                                         |
+|------------     |-------------------------------------------------------------------------------------------|
+| **Name**        |    ELK Stack (Elasticsearch, Logstash, Kibana)                                            |
+| **Definition**  |    Collection of tools for searching, analyzing, and visualizing log data.                |
+| **Strength**    |    Centralized logging and visualization.                                                 |
+| **Advantage**   |    Provides powerful search, analysis, and visualization of logs.                         |
+| **Utility**     |    Enables effective log management and analysis.                                         |
+
+Why choose this tool?
+The ELK Stack offers robust log management, search, and visualization capabilities, helping to monitor and analyze system and application logs effectively.
+
+# Slack
+
+| Propriété  	  |                       Description                                                         |
+|------------     |-------------------------------------------------------------------------------------------|
+| **Name**        |    Slack                                                                                  |
+| **Definition**  |    Collaboration platform for team communication and integration                          |
+| **Strength**    |    Facilitates team communication and collaboration.                                      |
+| **Advantage**   |    Integrates with various tools for streamlined workflows.                               |
+| **Utility**     |    Enhances team communication and workflow integration.                                  |
+
+
+
+# Kubernetes Tools:
+
+## kubectl
+
+| Property          | Description                                                                              |
+|-------------------|------------------------------------------------------------------------------------------|
+| **Tool**          | kubectl                                                                                  |
+| **Description**   | Command-line interface for interacting with Kubernetes.                                  |
+| **Justification** | Allows management and manipulation of Kubernetes resources from the command line.        |
+ 
+## Helm
+
+| Property          | Description                                                                                          |
+|-------------------|------------------------------------------------------------------------------------------------------|
+| **Tool**          | Helm                                                                                                 |
+| **Description**   | Package manager for Kubernetes that simplifies the installation and management of applications.      |
+| **Justification** | Streamlines deployment, configuration, and management of Kubernetes applications.                    |
+ 
+## Kustomize
+
+| Property          | Description                                                                |
+|-------------------|----------------------------------------------------------------------------|
+| **Tool**          | Kustomize                                                                  |
+| **Description**   | Tool for customizing Kubernetes configurations.                            |
+| **Justification** | Allows modification of Kubernetes configuration files without duplication. |
+
+## K9s
+
+| Property          | Description                                                                   |
+|-------------------|-------------------------------------------------------------------------------|
+| **Tool**          | K9s                                                                           |
+| **Description**   | Terminal-based user interface for managing Kubernetes.                        |
+| **Justification** | Provides an interactive command-line interface for easier cluster management. |
+
+## Kubeless
+
+| Property          | Description                                                      |
+|-------------------|------------------------------------------------------------------|
+| **Tool**          | Kubeless                                                         |
+| **Description**   | Serverless solution for Kubernetes.                              |
+| **Justification** | Enables serverless function deployment on Kubernetes.            |
+
+## ArgoCD
+
+| Property          | Description                                                                                       |
+|-------------------|---------------------------------------------------------------------------------------------------|
+| **Tool**          | ArgoCD                                                                                            |
+| **Description**   | Continuous deployment tool for Kubernetes based on GitOps.                                        |
+| **Justification** | Facilitates automated deployment and management of applications using Git as the source of truth. |
+
+## Prometheus
+
+| Property          | Description                                                                             |
+|-------------------|-----------------------------------------------------------------------------------------|
+| **Tool**          | Prometheus                                                                              |
+| **Description**   | Monitoring and alerting toolkit for Kubernetes.                                         |
+| **Justification** | Provides metrics collection and monitoring capabilities with a powerful query language. |
+
+## Grafana
+
+| Property          | Description                                                                          |
+|-------------------|--------------------------------------------------------------------------------------|
+| **Tool**          | Grafana                                                                              |
+| **Description**   | Visualization tool for metrics collected by Prometheus.                              |
+| **Justification** | Allows creation of interactive dashboards to visualize metrics and performance data. |
+
+
+# Docker Tools
+
+## Docker CLI
+
+| Property          | Description                                                                                  |
+|-------------------|----------------------------------------------------------------------------------------------|
+| **Tool**          | Docker CLI                                                                                   |
+| **Description**   | Command-line interface for interacting with Docker.                                          |
+| **Justification** | Allows management of Docker containers, images, volumes, and networks from the command line. |
+
+## Docker Compose
+
+| Property          | Description                                                                            |
+|-------------------|----------------------------------------------------------------------------------------|
+| **Tool**          | Docker Compose                                                                         |
+| **Description**   | Tool for defining and running multi-container Docker applications.                     |
+| **Justification** | Simplifies the management of complex applications using a single configuration file.   |
+
+## Docker Swarm
+
+| Property          | Description                                                                 |
+|-------------------|-----------------------------------------------------------------------------|
+| **Tool**          | Docker Swarm                                                                |
+| **Description**   | Docker's native clustering and orchestration tool.                          |
+| **Justification** | Manages Docker container clusters with built-in orchestration capabilities. |
+
+## Docker Registry
+
+| Property          | Description                                                               |
+|-------------------|---------------------------------------------------------------------------|
+| **Tool**          | Docker Registry                                                           |
+| **Description**   | Server for storing and distributing Docker images.                        |
+| **Justification** | Enables storage and distribution of Docker images within an organization. |
+
+## Portainer
+
+| Property          | Description                                                                   |
+|-------------------|-------------------------------------------------------------------------------|
+| **Tool**          | Portainer                                                                     |
+| **Description**   | User interface for managing Docker environments.                              |
+| **Justification** | Provides a graphical interface for managing and monitoring Docker containers. |
+
+## Docker Hub
+
+| Property          | Description                                                                                |
+|-------------------|--------------------------------------------------------------------------------------------|
+| **Tool**          | Docker Hub                                                                                 |
+| **Description**   | Cloud-based registry service for storing and sharing Docker images.                        |
+| **Justification** | Offers a public and private repository for Docker images with search and sharing features. |
+
+
+
+
+
+
+
+
 
 
 ## Getting started
