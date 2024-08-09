@@ -100,7 +100,7 @@ Jest simplifies the process of writing and running tests for JavaScript applicat
 | **Definition**  |    Testing framework for PHP that supports unit testing.                                  |
 | **Strength**    |    Comprehensive unit testing for PHP.                                                    |
 | **Advantage**   |    Ensures PHP code quality and reliability through unit tests.                           |
-| **Utility**     |    Facilitates unit testing for PHP projects.                                  
+| **Utility**     |    Facilitates unit testing for PHP projects.                                             |
 
 Why choose this tool?
 PHPUnit is essential for maintaining high-quality PHP code by enabling thorough unit testing and validation.
@@ -214,8 +214,7 @@ Trivy helps ensure container security by scanning images and configurations for 
 | Propriété  	  |                       Description                                                                                   |
 |------------     |---------------------------------------------------------------------------------------------------------------------|
 | **Name**        |    Kubernetes                                                                                                       |
-| **Definition**  |    An open-source platform for automating the deployment, scaling, and management ofcontainerized 
-                       applications across clusters of machines.                                                                        |
+| **Definition**  |    An open-source platform for automating the deployment, scaling, and management ofcontainerized                   |
 | **Strength**    |    Provides powerful orchestration capabilities for managing containerized applications.                            |
 | **Advantage**   |    Enables efficient scaling, load balancing, and self-healing of applications within clusters.                     |
 | **Utility**     |    Facilitates the orchestration and management of containerized applications, improving scalability and reliability|
