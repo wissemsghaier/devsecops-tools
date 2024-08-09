@@ -79,7 +79,7 @@ Why choose this tool?
 SonarQube offers detailed analysis of code quality, helping to detect and fix bugs and vulnerabilities early in the development process.
 
 ## Docker-compose of Sonarqube 
-
+```
 version: '3.8'
 
 services:
@@ -101,7 +101,7 @@ networks:
 volumes:
   sonarqube_data:
   sonarqube_extensions:
-
+```
 ## Explication Docker Compose Configuration 
 
 This section explains the configuration of the Docker Compose file for setting up SonarQube.
@@ -277,7 +277,7 @@ Why choose this tool?
 Trivy helps ensure container security by scanning images and configurations for vulnerabilities, improving overall security posture.
 
 ## Docker-compose of Sonarqube
-
+```
 version: '3'
 
 services:
@@ -296,7 +296,7 @@ volumes:
 networks:
   devsecops:
     driver: bridge
-
+```
 
 ## Explication Docker Compose Configuration 
 
@@ -304,7 +304,7 @@ This section explains the configuration of the Docker Compose file for setting u
 
 ### Version
 
-- **version: '3'**  
+- **version: '3'** 
   Specifies the version of the Docker Compose file format. Version `3` is compatible with Docker Engine 1.13.0 and later and supports features such as defining services, networks, and volumes.
 
 ### Services
@@ -313,7 +313,7 @@ This section defines the services that make up your application. Each service re
 
 #### trivy
 
-- **image**: `aquasec/trivy:latest`  
+- **image**: `aquasec/trivy:latest` 
   Specifies the Docker image to use for this service. `aquasec/trivy:latest` pulls the latest version of the Trivy image from Docker Hub. Trivy is a security scanner for container images.
 
 - **container_name**: `trivy`  
