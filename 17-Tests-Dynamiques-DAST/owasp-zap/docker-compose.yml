@@ -2,19 +2,22 @@ version: '3'
 
 services:
   owasp-zap:
-    image: zaproxy/zap-stable
+    image: zaproxy/zap-stable:2.15.0
     container_name: owasp-zap
     ports:
-      - "7070:8080"  # Change the host port to 7070, keeping the container port as 8080
-    volumes:
-      - zap_data:/zap/wrk
+      - "9090:8080"  # Map host port 9090 to container port 8080
     networks:
       - devsecops
-
-volumes:
-  zap_data:
+    environment:
+      - ZAP_USER=user
+      - ZAP_PASSWORD=password
+    volumes:
+      - zap_data:/zap/wrk  # Optional: persist ZAP data
 
 networks:
   devsecops:
     driver: bridge
+
+volumes:
+  zap_data:
 
